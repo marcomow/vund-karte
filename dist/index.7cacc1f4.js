@@ -443,12 +443,14 @@ id) /*: string*/
 
 },{}],"3rfh7":[function(require,module,exports) {
 var _methodsCreateMap = require("./methods/createMap");
+var _methodsInitPreloader = require("./methods/initPreloader");
 const init = async () => {
+  _methodsInitPreloader.initPreloader();
   _methodsCreateMap.createMap();
 };
 init();
 
-},{"./methods/createMap":"4zjpV"}],"4zjpV":[function(require,module,exports) {
+},{"./methods/createMap":"4zjpV","./methods/initPreloader":"1PIyo"}],"4zjpV":[function(require,module,exports) {
 var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
 _parcelHelpers.defineInteropFlag(exports);
 _parcelHelpers.export(exports, "createMap", function () {
@@ -12841,6 +12843,30 @@ const createCustomMarker = category => {
   return icon;
 };
 
-},{"leaflet":"QyATM","./stringToRGBA":"1auc4","latinize":"1IiBa","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y"}]},["2E730","3rfh7"], "3rfh7", "parcelRequire427e")
+},{"leaflet":"QyATM","./stringToRGBA":"1auc4","latinize":"1IiBa","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y"}],"1PIyo":[function(require,module,exports) {
+var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
+_parcelHelpers.defineInteropFlag(exports);
+_parcelHelpers.export(exports, "initPreloader", function () {
+  return initPreloader;
+});
+const initPreloader = () => {
+  const preloader = document.querySelector('.preloader');
+  const fadeEffect = setInterval(() => {
+    // if we don't set opacity 1 in CSS, then   //it will be equaled to "", that's why we   // check it
+    if (!preloader.style.opacity) {
+      preloader.style.opacity = 1 + '';
+    }
+    const oldOpacity = Number(preloader.style.opacity);
+    if (oldOpacity > 0) {
+      const newOpacity = oldOpacity - 0.1;
+      preloader.style.opacity = newOpacity + '';
+    } else {
+      clearInterval(fadeEffect);
+      preloader.style.display = 'none';
+    }
+  }, 300);
+};
+
+},{"@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y"}]},["2E730","3rfh7"], "3rfh7", "parcelRequire427e")
 
 //# sourceMappingURL=index.7cacc1f4.js.map

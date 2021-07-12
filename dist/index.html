@@ -23,10 +23,36 @@
             margin-right: 8px;
             opacity: 0.7;
         }
+        .preloader {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            width: 100%;
+            background: rgb(23, 22, 22);
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 9999;
+            transition: opacity 0.2s linear;
+        }
 </style>
 </head>
 
 <body class="w-screen h-screen">
+    <div class="preloader">
+        <svg width="200" height="200" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 100 100" preserveaspectratio="xMidYMid" class="lds-ripple" style="background:0 0
+">
+            <circle cx="50" cy="50" r="4.719" fill="none" stroke="#1d3f72" stroke-width="2">
+                <animate attributename="r" calcmode="spline" values="0;40" keytimes="0;1" dur="3" keysplines="0 0.2 0.8 1" begin="-1.5s" repeatcount="indefinite"></animate>
+                <animate attributename="opacity" calcmode="spline" values="1;0" keytimes="0;1" dur="3" keysplines="0.2 0 0.8 1" begin="-1.5s" repeatcount="indefinite"></animate>
+            </circle>
+            <circle cx="50" cy="50" r="27.591" fill="none" stroke="#5699d2" stroke-width="2">
+                <animate attributename="r" calcmode="spline" values="0;40" keytimes="0;1" dur="3" keysplines="0 0.2 0.8 1" begin="0s" repeatcount="indefinite"></animate>
+                <animate attributename="opacity" calcmode="spline" values="1;0" keytimes="0;1" dur="3" keysplines="0.2 0 0.8 1" begin="0s" repeatcount="indefinite"></animate>
+            </circle>
+        </svg>
+    </div>
     <div class="w-screen h-screen flex">
         <div id="map" class="m-auto w-full h-full"></div>
     </div>
