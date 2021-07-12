@@ -6,4 +6,3 @@ node_modules
 .env.build
 .vercel
 .parcel-cache
-public
