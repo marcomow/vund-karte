@@ -1,0 +1,5 @@
+{
+  "scripts": {
+    "build": "del public && mkdir public && echo 'Custom Build' > ./public/index.html"
+  }
+}
