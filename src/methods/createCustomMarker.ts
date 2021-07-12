@@ -6,8 +6,8 @@ export const createCustomMarker: (category: string) => L.DivIcon = (category: st
     const latinizedCategory: string = latinize(category).replace(new RegExp(' ', 'g'), '_');
     const icon: L.DivIcon = L.divIcon({
         className: "my-custom-pin",
-        iconAnchor: [0, 24],
-        popupAnchor: [0, -36],
+        iconAnchor: [0, 0],
+        popupAnchor: [24, 5],
         html: `<svg width="48px" height="48px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 365 560" enable-background="new 0 0 365 560" xml:space="preserve">
                 <g>
                 <defs>
