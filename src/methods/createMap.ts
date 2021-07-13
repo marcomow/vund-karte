@@ -1,4 +1,4 @@
-import L from "leaflet";
+import * as L from 'leaflet';
 import { createCustomMarker } from "./createCustomMarker";
 import { fetchPlacesList } from "./fetchPlacesList";
 import { stringToRGBA } from "./stringToRGBA";

@@ -1,11 +1,28 @@
 {
   "license": "UNLICENSED",
-  "description": "a map interface to show vaccinated-friendly enterprises in Latvia -  for the portal vund.lv ",
+  "name": "vund-karte",
+  "description": "Latvijas atbildīgo uzņēmumu saraksts Uzņēmumi, kas ievēro epidemioloģiskās drošības pasākumus Covid-19 infekcijas izplatības ierobežošanai un sniedz labu pieredzi vakcinētajiem.",
   "source": "src/index.html",
-  "main": "public/index.html",
+  "pwaManifest": {
+    "name": "VUND karte",
+    "shortName": "VUND karte",
+    "startURL": "./index.html",
+    "theme": "#add8e6",
+    "generateIconOptions": {
+      "baseIcon": "src/assets/vund_logo.svg",
+      "sizes": [
+        192
+      ],
+      "genFavicons": true
+    }
+  },
+  "browserslist": [
+    "since 2017-06"
+  ],
   "scripts": {
     "watch": "cross-env-shell NODE_ENV=development \"parcel serve src/index.html --host localhost\"",
-    "build": "cross-env-shell NODE_ENV=production \"rimraf public /Q && parcel build src/index.html --public-url ./ \""
+    "build": "cross-env-shell NODE_ENV=production \"rimraf public /Q && parcel build src/index.html --dist-dir public --public-url ./ && rimraf dist /Q \"",
+    "serve built": "cross-env-shell NODE_ENV=production \"parcel serve public/index.html --host localhost\""
   },
   "dependencies": {
     "@types/leaflet": "^1.7.4",
@@ -18,6 +35,8 @@
     "platform": "^1.3.6"
   },
   "devDependencies": {
+    "@parcel/packager-raw-url": "2.0.0-beta.2",
+    "@parcel/transformer-webmanifest": "2.0.0-beta.2",
     "parcel-plugin-obfuscate": "^2.1.1",
     "rimraf": "^3.0.2"
   }
