@@ -1,11 +1,6 @@
 const cacheName = 'vund-karte';
 const precacheResources = [
-    'index.html',
-    'assets/favicon.png',
-    'assets/favicon144.png',
-    'assets/vund_logo.svg',
-    'libraries/leaflet.css',
-    'libraries/tailwind.min.css'
+    'index.html'
 ];
 self.addEventListener('install', (event) => {
     event.waitUntil(caches.open(cacheName).then((cache) => cache.addAll(precacheResources)));
