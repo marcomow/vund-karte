@@ -3,6 +3,7 @@ import { createCustomMarker } from "./createCustomMarker";
 import { fetchPlacesList } from "./fetchPlacesList";
 import { stringToRGBA } from "./stringToRGBA";
 import latinize from 'latinize';
+import platform from 'platform';
 
 export const createMap: () => Promise<void> = async (): Promise<void> => {
     const map: L.Map = L.map('map').setView([56.9496, 24.5052], 8);
@@ -39,11 +40,17 @@ export const createMap: () => Promise<void> = async (): Promise<void> => {
             [place['Latitude'], place['Longitude']],
             { icon }
         );
+        const os: string = platform.os.toString().toLowerCase();
+        const destinationAddress: string = `${place['Nosaukums']}+${place['Adrese']}+${place['Pilsēta']}`.replace(new RegExp(' ', 'g'), '+');
+        const hrefDestination: string = os.startsWith('iOS') || os.startsWith('android') ?
+            `geo:${place['Latitude']},${place['Longitude']}?q=${destinationAddress}`
+            : `https://maps.${os.startsWith('mac') ? 'apple.com/maps?q=' : 'google.com/maps?saddr=My+Location&daddr='}${destinationAddress}`
+            ;
         marker.bindPopup(`
             <b>${place['Nosaukums']}</b>
             <img src="${place['Logo']}">
             <p style="background-color:${stringToRGBA(latinize(place['Kategorija']), 1)};color:white;padding:4px">${place['Kategorija']}</p>
-            <p><a href="https://maps.google.lv/maps?q=>${place['Pilnā Adrese']}">${place['Pilnā Adrese']}</a></p>
+            <p><a href="${hrefDestination}" target="_blank">🗺️ ${place['Pilnā Adrese']}</a></p>
             <p><a href="${place['Mājaslapa']}" target="_blank">mājaslapa 🔗</a></p>
             <p>${place['Komentāri']}</p>
         `);
