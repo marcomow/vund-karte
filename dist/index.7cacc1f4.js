@@ -500,15 +500,16 @@ const createMap = async () => {
     marker.bindPopup(`
             <b>${place['Nosaukums']}</b>
             <img src="${place['Logo']}">
-            <p>${place['Kategorija']}</p>
-            <a href="${place['Mājaslapa']}" target="_blank">mājaslapa 🔗</a>
+            <p style="background-color:${_stringToRGBA.stringToRGBA(_latinizeDefault.default(place['Kategorija']), 1)};color:white;padding:4px">${place['Kategorija']}</p>
+            <p><a href="https://maps.google.lv/maps?q=>${place['Pilnā Adrese']}">${place['Pilnā Adrese']}</a></p>
+            <p><a href="${place['Mājaslapa']}" target="_blank">mājaslapa 🔗</a></p>
             <p>${place['Komentāri']}</p>
         `);
     marker.addTo(map);
   });
 };
 
-},{"leaflet":"QyATM","./fetchPlacesList":"7APzD","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y","./stringToRGBA":"1auc4","latinize":"1IiBa","./createCustomMarker":"4xKjt"}],"QyATM":[function(require,module,exports) {
+},{"leaflet":"QyATM","./createCustomMarker":"4xKjt","./fetchPlacesList":"7APzD","./stringToRGBA":"1auc4","latinize":"1IiBa","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y"}],"QyATM":[function(require,module,exports) {
 var define;
 /*@preserve
 * Leaflet 1.7.1, a JS library for interactive maps. http://leafletjs.com
@@ -11801,16 +11802,63 @@ var define;
   window.L = exports;
 });
 
-},{}],"7APzD":[function(require,module,exports) {
+},{}],"4xKjt":[function(require,module,exports) {
 var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
 _parcelHelpers.defineInteropFlag(exports);
-_parcelHelpers.export(exports, "fetchPlacesList", function () {
-  return fetchPlacesList;
+_parcelHelpers.export(exports, "createCustomMarker", function () {
+  return createCustomMarker;
 });
-const fetchPlacesList = async () => {
-  const url = `https://script.google.com/macros/s/AKfycbw8e4qzc4d0j7r4luNsFm1zJb1MyslMPsePjB-_elzi0Cpwdgq3uuzCwuxXJ9n348YD/exec`;
-  const placesList = await (await fetch(url)).json();
-  return placesList;
+var _leaflet = require("leaflet");
+var _leafletDefault = _parcelHelpers.interopDefault(_leaflet);
+var _stringToRGBA = require("./stringToRGBA");
+var _latinize = require('latinize');
+var _latinizeDefault = _parcelHelpers.interopDefault(_latinize);
+const createCustomMarker = category => {
+  const latinizedCategory = _latinizeDefault.default(category).replace(new RegExp(' ', 'g'), '_');
+  const icon = _leafletDefault.default.divIcon({
+    className: "my-custom-pin",
+    iconAnchor: [0, 0],
+    popupAnchor: [24, 5],
+    html: `<svg width="48px" height="48px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 365 560" enable-background="new 0 0 365 560" xml:space="preserve">
+                <g>
+                <defs>
+                    <radialGradient id="gradient_${latinizedCategory}">
+                        <stop offset="1%" stop-color="${_stringToRGBA.stringToRGBA(latinizedCategory, 1)}" />
+                        <stop offset="98%" stop-color="${_stringToRGBA.stringToRGBA(latinizedCategory, 0.88)}" />
+                    </radialGradient>
+                </defs>
+                <path fill="url(#gradient_${latinizedCategory})" stroke="white" stroke-width="16" d="M182.9,551.7c0,0.1,0.2,0.3,0.2,0.3S358.3,283,358.3,194.6c0-130.1-88.8-186.7-175.4-186.9
+                    C96.3,7.9,7.5,64.5,7.5,194.6c0,88.4,175.3,357.4,175.3,357.4S182.9,551.7,182.9,551.7z M122.2,187.2c0-33.6,27.2-60.8,60.8-60.8
+                    c33.6,0,60.8,27.2,60.8,60.8S216.5,248,182.9,248C149.4,248,122.2,220.8,122.2,187.2z"/>
+                </g>
+                </svg>
+            `
+  });
+  return icon;
+};
+
+},{"leaflet":"QyATM","./stringToRGBA":"1auc4","latinize":"1IiBa","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y"}],"1auc4":[function(require,module,exports) {
+var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
+_parcelHelpers.defineInteropFlag(exports);
+_parcelHelpers.export(exports, "stringToRGBA", function () {
+  return stringToRGBA;
+});
+const stringToRGBA = (string, transparency) => {
+  let hash = 0;
+  if (string.length === 0) {
+    return hash.toString();
+  }
+  ;
+  for (let i = 0; i < string.length; i++) {
+    hash = string.charCodeAt(i) + ((hash << 5) - hash);
+    hash = hash & hash;
+  }
+  const rgb = [0, 0, 0];
+  for (let i = 0; i < 3; i++) {
+    const value = hash >> i * 8 & 255;
+    rgb[i] = value;
+  }
+  return `rgba(${rgb[0]}, ${rgb[1]}, ${rgb[2]}, ${transparency})`;
 };
 
 },{"@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y"}],"5gA8y":[function(require,module,exports) {
@@ -11855,31 +11903,7 @@ exports.export = function (dest, destName, get) {
     get: get
   });
 };
-},{}],"1auc4":[function(require,module,exports) {
-var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
-_parcelHelpers.defineInteropFlag(exports);
-_parcelHelpers.export(exports, "stringToRGBA", function () {
-  return stringToRGBA;
-});
-const stringToRGBA = (string, transparency) => {
-  let hash = 0;
-  if (string.length === 0) {
-    return hash.toString();
-  }
-  ;
-  for (let i = 0; i < string.length; i++) {
-    hash = string.charCodeAt(i) + ((hash << 5) - hash);
-    hash = hash & hash;
-  }
-  const rgb = [0, 0, 0];
-  for (let i = 0; i < 3; i++) {
-    const value = hash >> i * 8 & 255;
-    rgb[i] = value;
-  }
-  return `rgba(${rgb[0]}, ${rgb[1]}, ${rgb[2]}, ${transparency})`;
-};
-
-},{"@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y"}],"1IiBa":[function(require,module,exports) {
+},{}],"1IiBa":[function(require,module,exports) {
 var define;
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -12808,63 +12832,40 @@ var define;
   return latinize;
 });
 
-},{}],"4xKjt":[function(require,module,exports) {
+},{}],"7APzD":[function(require,module,exports) {
 var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
 _parcelHelpers.defineInteropFlag(exports);
-_parcelHelpers.export(exports, "createCustomMarker", function () {
-  return createCustomMarker;
+_parcelHelpers.export(exports, "fetchPlacesList", function () {
+  return fetchPlacesList;
 });
-var _leaflet = require("leaflet");
-var _leafletDefault = _parcelHelpers.interopDefault(_leaflet);
-var _stringToRGBA = require("./stringToRGBA");
-var _latinize = require('latinize');
-var _latinizeDefault = _parcelHelpers.interopDefault(_latinize);
-const createCustomMarker = category => {
-  const latinizedCategory = _latinizeDefault.default(category).replace(new RegExp(' ', 'g'), '_');
-  const icon = _leafletDefault.default.divIcon({
-    className: "my-custom-pin",
-    iconAnchor: [0, 0],
-    popupAnchor: [24, 5],
-    html: `<svg width="48px" height="48px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 365 560" enable-background="new 0 0 365 560" xml:space="preserve">
-                <g>
-                <defs>
-                    <radialGradient id="gradient_${latinizedCategory}">
-                        <stop offset="1%" stop-color="${_stringToRGBA.stringToRGBA(latinizedCategory, 1)}" />
-                        <stop offset="98%" stop-color="${_stringToRGBA.stringToRGBA(latinizedCategory, 0.88)}" />
-                    </radialGradient>
-                </defs>
-                <path fill="url(#gradient_${latinizedCategory})" stroke="white" stroke-width="16" d="M182.9,551.7c0,0.1,0.2,0.3,0.2,0.3S358.3,283,358.3,194.6c0-130.1-88.8-186.7-175.4-186.9
-                    C96.3,7.9,7.5,64.5,7.5,194.6c0,88.4,175.3,357.4,175.3,357.4S182.9,551.7,182.9,551.7z M122.2,187.2c0-33.6,27.2-60.8,60.8-60.8
-                    c33.6,0,60.8,27.2,60.8,60.8S216.5,248,182.9,248C149.4,248,122.2,220.8,122.2,187.2z"/>
-                </g>
-                </svg>
-            `
-  });
-  return icon;
+const fetchPlacesList = async () => {
+  const url = `https://script.google.com/macros/s/AKfycbw8e4qzc4d0j7r4luNsFm1zJb1MyslMPsePjB-_elzi0Cpwdgq3uuzCwuxXJ9n348YD/exec`;
+  const placesList = await (await fetch(url)).json();
+  return placesList;
 };
 
-},{"leaflet":"QyATM","./stringToRGBA":"1auc4","latinize":"1IiBa","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y"}],"1PIyo":[function(require,module,exports) {
+},{"@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y"}],"1PIyo":[function(require,module,exports) {
 var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
 _parcelHelpers.defineInteropFlag(exports);
 _parcelHelpers.export(exports, "initPreloader", function () {
   return initPreloader;
 });
 const initPreloader = () => {
-  const preloader = document.querySelector('.preloader');
+  const preloader = document.querySelector('#preloader');
   const fadeEffect = setInterval(() => {
-    // if we don't set opacity 1 in CSS, then   //it will be equaled to "", that's why we   // check it
+    // if we don't set opacity 1 in CSS, then   //it will be equaled to "", that's why we check it
     if (!preloader.style.opacity) {
       preloader.style.opacity = 1 + '';
     }
     const oldOpacity = Number(preloader.style.opacity);
     if (oldOpacity > 0) {
-      const newOpacity = oldOpacity - 0.1;
+      const newOpacity = oldOpacity - 0.02;
       preloader.style.opacity = newOpacity + '';
     } else {
       clearInterval(fadeEffect);
       preloader.style.display = 'none';
     }
-  }, 300);
+  }, 50);
 };
 
 },{"@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y"}]},["2E730","3rfh7"], "3rfh7", "parcelRequire427e")

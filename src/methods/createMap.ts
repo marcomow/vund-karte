@@ -42,8 +42,9 @@ export const createMap: () => Promise<void> = async (): Promise<void> => {
         marker.bindPopup(`
             <b>${place['Nosaukums']}</b>
             <img src="${place['Logo']}">
-            <p>${place['Kategorija']}</p>
-            <a href="${place['Mājaslapa']}" target="_blank">mājaslapa 🔗</a>
+            <p style="background-color:${stringToRGBA(latinize(place['Kategorija']), 1)};color:white;padding:4px">${place['Kategorija']}</p>
+            <p><a href="https://maps.google.lv/maps?q=>${place['Pilnā Adrese']}">${place['Pilnā Adrese']}</a></p>
+            <p><a href="${place['Mājaslapa']}" target="_blank">mājaslapa 🔗</a></p>
             <p>${place['Komentāri']}</p>
         `);
         marker.addTo(map);
