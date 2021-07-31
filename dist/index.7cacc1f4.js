@@ -140,9 +140,9 @@
       this[globalName] = mainExports;
     }
   }
-})({"5DHG7":[function(require,module,exports) {
+})({"2E730":[function(require,module,exports) {
 var HMR_HOST = "localhost";
-var HMR_PORT = 1029;
+var HMR_PORT = 1234;
 var HMR_SECURE = false;
 var HMR_ENV_HASH = "d751713988987e9331980363e24189ce";
 module.bundle.HMR_BUNDLE_ID = "043affa210fd5d10be6d99797cacc1f4";
@@ -11818,14 +11818,15 @@ var _leaflet = require('leaflet');
 var _stringToRGBA = require("./stringToRGBA");
 var _latinize = require('latinize');
 var _latinizeDefault = _parcelHelpers.interopDefault(_latinize);
+var _commons = require('../../commons');
 const createCustomMarker = category => {
   const latinizedCategory = _latinizeDefault.default(category).replace(new RegExp(' ', 'g'), '_');
   const icon = _leaflet.divIcon({
     className: "my-custom-pin",
-    iconSize: [48, 48],
-    iconAnchor: [24, 48],
-    popupAnchor: [24, 5],
-    html: `<svg width="48px" height="48px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 365 560" enable-background="new 0 0 365 560" xml:space="preserve">
+    iconSize: [_commons.COMMONS.size_marker, _commons.COMMONS.size_marker],
+    iconAnchor: [_commons.COMMONS.size_marker / 2, _commons.COMMONS.size_marker],
+    popupAnchor: [0, -_commons.COMMONS.size_marker + 2],
+    html: `<svg width="${_commons.COMMONS.size_marker}" height="${_commons.COMMONS.size_marker}px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 365 560" enable-background="new 0 0 365 560" xml:space="preserve">
                 <g>
                 <defs>
                     <radialGradient id="gradient_${latinizedCategory}">
@@ -11843,7 +11844,7 @@ const createCustomMarker = category => {
   return icon;
 };
 
-},{"leaflet":"QyATM","./stringToRGBA":"1auc4","latinize":"1IiBa","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y"}],"1auc4":[function(require,module,exports) {
+},{"leaflet":"QyATM","./stringToRGBA":"1auc4","latinize":"1IiBa","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y","../../commons":"535ZF"}],"1auc4":[function(require,module,exports) {
 var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
 _parcelHelpers.defineInteropFlag(exports);
 _parcelHelpers.export(exports, "stringToRGBA", function () {
@@ -12838,7 +12839,17 @@ var define;
   return latinize;
 });
 
-},{}],"7APzD":[function(require,module,exports) {
+},{}],"535ZF":[function(require,module,exports) {
+var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
+_parcelHelpers.defineInteropFlag(exports);
+_parcelHelpers.export(exports, "COMMONS", function () {
+  return COMMONS;
+});
+const COMMONS = {
+  size_marker: 48
+};
+
+},{"@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y"}],"7APzD":[function(require,module,exports) {
 var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
 _parcelHelpers.defineInteropFlag(exports);
 _parcelHelpers.export(exports, "fetchPlacesList", function () {
@@ -14020,6 +14031,6 @@ function getOrigin(url) {
 exports.getBundleURL = getBundleURLCached;
 exports.getBaseURL = getBaseURL;
 exports.getOrigin = getOrigin;
-},{}]},["5DHG7","3rfh7"], "3rfh7", "parcelRequire015c")
+},{}]},["2E730","3rfh7"], "3rfh7", "parcelRequire015c")
 
 //# sourceMappingURL=index.7cacc1f4.js.map
