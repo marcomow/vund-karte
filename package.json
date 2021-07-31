@@ -41,6 +41,7 @@
     "@parcel/transformer-webmanifest": "2.0.0-beta.2",
     "install-peers": "^1.0.3",
     "parcel-plugin-obfuscate": "^2.1.1",
-    "rimraf": "^3.0.2"
+    "rimraf": "^3.0.2",
+    "postcss":"8.2.10"
   }
 }
