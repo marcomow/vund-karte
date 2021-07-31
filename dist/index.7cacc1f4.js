@@ -507,7 +507,7 @@ const createMap = async () => {
             <b>${place['Nosaukums']}</b>
             <img src="${place['Logo']}">
             <p style="background-color:${_stringToRGBA.stringToRGBA(_latinizeDefault.default(place['Kategorija']), 1)};color:white;padding:4px">${place['Kategorija']}</p>
-            <p><a href="${hrefDestination}" target="_blank">🗺️ ${place['Pilnā Adrese']}</a></p>
+            <p><a href="${hrefDestination}" target="_blank">${place['Pilnā Adrese']} - 🗺️rādit kartē</a></p>
             <p><a href="${place['Mājaslapa']}" target="_blank">mājaslapa 🔗</a></p>
             <p>${place['Komentāri']}</p>
         `);
