@@ -504,11 +504,11 @@ const createMap = async () => {
     const destinationAddress = `${place['Nosaukums']}+${place['Adrese']}+${place['Pilsēta']}`.replace(new RegExp(' ', 'g'), '+');
     const hrefDestination = os.startsWith('iOS') || os.startsWith('android') ? `geo:${place['Latitude']},${place['Longitude']}?q=${destinationAddress}` : `https://maps.${os.startsWith('mac') ? 'apple.com/maps?q=' : 'google.com/maps?saddr=My+Location&daddr='}${destinationAddress}`;
     marker.bindPopup(`
-            <b>${place['Nosaukums']}</b>
+            <p class="text-center"><b>${place['Nosaukums']}</b></p>
             <img src="${place['Logo']}">
             <p style="background-color:${_stringToRGBA.stringToRGBA(_latinizeDefault.default(place['Kategorija']), 1)};color:white;padding:4px">${place['Kategorija']}</p>
-            <p><a href="${hrefDestination}" target="_blank">${place['Pilnā Adrese']} - 🗺️rādit kartē</a></p>
-            <p><a href="${place['Mājaslapa']}" target="_blank">mājaslapa 🔗</a></p>
+            <p class="text-center"><a href="${hrefDestination}" target="_blank">${place['Pilnā Adrese']}<br>rādit kartē 🗺️</a></p>
+            <p class="text-center"><a href="${place['Mājaslapa']}" target="_blank">mājaslapa 🔗</a></p>
             <p>${place['Komentāri']}</p>
         `);
     marker.addTo(map);

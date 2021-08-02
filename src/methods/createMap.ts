@@ -46,11 +46,11 @@ export const createMap: () => Promise<void> = async (): Promise<void> => {
             : `https://maps.${os.startsWith('mac') ? 'apple.com/maps?q=' : 'google.com/maps?saddr=My+Location&daddr='}${destinationAddress}`
             ;
         marker.bindPopup(`
-            <b>${place['Nosaukums']}</b>
+            <p class="text-center"><b>${place['Nosaukums']}</b></p>
             <img src="${place['Logo']}">
             <p style="background-color:${stringToRGBA(latinize(place['Kategorija']), 1)};color:white;padding:4px">${place['Kategorija']}</p>
-            <p><a href="${hrefDestination}" target="_blank">${place['Pilnā Adrese']} - 🗺️rādit kartē</a></p>
-            <p><a href="${place['Mājaslapa']}" target="_blank">mājaslapa 🔗</a></p>
+            <p class="text-center"><a href="${hrefDestination}" target="_blank">${place['Pilnā Adrese']}<br>rādit kartē 🗺️</a></p>
+            <p class="text-center"><a href="${place['Mājaslapa']}" target="_blank">mājaslapa 🔗</a></p>
             <p>${place['Komentāri']}</p>
         `);
         marker.addTo(map);
