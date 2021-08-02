@@ -9,7 +9,7 @@ export const createCustomMarker: (category: string) => L.DivIcon = (category: st
         className: "my-custom-pin",
         iconSize: [COMMONS.size_marker, COMMONS.size_marker],
         iconAnchor: [COMMONS.size_marker / 2, COMMONS.size_marker],
-        popupAnchor: [0, -COMMONS.size_marker + 2],
+        popupAnchor: [0, (-COMMONS.size_marker) + 2],
         html: `<svg width="${COMMONS.size_marker}" height="${COMMONS.size_marker}px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 365 560" enable-background="new 0 0 365 560" xml:space="preserve">
                 <g>
                 <defs>
