@@ -1712,10 +1712,9 @@ alphanum-sort@^1.0.0:
   resolved "https://registry.yarnpkg.com/alphanum-sort/-/alphanum-sort-1.0.2.tgz#97a1119649b211ad33691d9f9f486a8ec9fbe0a3"
   integrity sha1-l6ERlkmyEa0zaR2fn0hqjsn74KM=
 
-ansi-html@^0.0.7:
-  version "0.0.7"
-  resolved "https://registry.yarnpkg.com/ansi-html/-/ansi-html-0.0.7.tgz#813584021962a9e9e6fd039f940d12f56ca7859e"
-  integrity sha1-gTWEAhliqenm/QOflA0S9WynhZ4=
+ansi-html@^0.0.7, "ansi-html@https://github.com/gebhardtr/ansi-html":
+  version "0.0.8"
+  resolved "https://github.com/gebhardtr/ansi-html#25ca3089b6cb0ff785b76e21643e51f2d3570f0b"
 
 ansi-regex@^2.0.0:
   version "2.1.1"
