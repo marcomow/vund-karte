@@ -42,7 +42,7 @@
   },
   "devDependencies": {
     "@parcel/packager-raw-url": "2.4.1",
-    "@parcel/transformer-webmanifest": "2.3.2",
+    "@parcel/transformer-webmanifest": "2.4.1",
     "install-peers": "^1.0.3",
     "parcel-plugin-obfuscate": "^2.1.1",
     "postcss": "8.4.12",
